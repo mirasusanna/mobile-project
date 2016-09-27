@@ -4,4 +4,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="one">Overview Screen</string>
+    <string name="two">Daily Screen</string>
+    <string name="three">Journal Screen</string>
 </resources>
