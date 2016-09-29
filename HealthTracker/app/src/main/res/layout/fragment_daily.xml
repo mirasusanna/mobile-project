@@ -7,8 +7,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/two"
-        android:textSize="40dp"
+        android:textSize="40sp"
         android:textStyle="bold"
         android:layout_centerInParent="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Steps taken:"
+        android:textSize="40sp"
+        android:layout_centerHorizontal="true"/>
+    <TextView
+        android:id="@+id/DailyFragment_stepsTaken"
+        android:text="Not available"
+        android:textSize="40sp"
+        android:layout_marginTop="45sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
