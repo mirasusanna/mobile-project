@@ -17,10 +17,8 @@ import android.widget.Toast;
  * Created by hieun on 27/09/16.
  */
 public class DailyFragment extends Fragment implements SensorEventListener {
-    private View view;
     private SensorManager sm;
     private TextView tv_stepsTaken;
-    private Sensor sensor_stepCounter;
 
     public DailyFragment() {
 
@@ -34,8 +32,8 @@ public class DailyFragment extends Fragment implements SensorEventListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_daily, container, false);
-        tv_stepsTaken = (TextView)view.findViewById(R.id.DailyFragment_stepsTaken);
+        View view = inflater.inflate(R.layout.fragment_daily, container, false);
+        tv_stepsTaken = (TextView) view.findViewById(R.id.DailyFragment_stepsTaken);
 
         return view;
     }
@@ -52,7 +50,7 @@ public class DailyFragment extends Fragment implements SensorEventListener {
     @Override
     public void onResume() {
         super.onResume();
-        sensor_stepCounter = sm.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        Sensor sensor_stepCounter = sm.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
         if (sensor_stepCounter != null) {
             sm.registerListener(this, sensor_stepCounter, SensorManager.SENSOR_DELAY_NORMAL);
         } else {
