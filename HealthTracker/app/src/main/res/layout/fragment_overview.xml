@@ -8,16 +8,27 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="240dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="44dp"
         android:id="@+id/overviewChart">
 
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/lineChart"
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="240dp" />
 
     </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/overviewInfo"
+        android:layout_below="@+id/overviewChart"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:clipToPadding="false"
+        android:layout_marginTop="24dp" />
+
 </RelativeLayout>
