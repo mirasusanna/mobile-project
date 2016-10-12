@@ -11,13 +11,19 @@
         android:key="weight"
         android:title="Weight"
         android:inputType="number"
-        android:summary="Your weight" />
+        android:summary="Your weight in kg" />
 
     <EditTextPreference
         android:key="height"
         android:title="Height"
         android:inputType="number"
-        android:summary="Your height" />
+        android:summary="Your height in cm" />
+
+    <EditTextPreference
+        android:key="age"
+        android:title="Age"
+        android:inputType="number"
+        android:summary="Your age" />
 
     <ListPreference
         android:key="activity-level"
