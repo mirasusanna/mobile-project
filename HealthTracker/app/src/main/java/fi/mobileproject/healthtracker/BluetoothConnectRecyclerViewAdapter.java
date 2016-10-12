@@ -37,4 +37,10 @@ public class BluetoothConnectRecyclerViewAdapter extends RecyclerView.Adapter<Li
     public int getItemCount() {
         return titles.size();
     }
+
+    public void clearData() {
+        int size = titles.size();
+        titles.clear();
+        this.notifyItemRangeRemoved(0, size);
+    }
 }

@@ -29,7 +29,7 @@ public class DailyFragment extends Fragment implements SensorEventListener, Obse
     private TextView tv_calories;
     private TextView tv_BPM;
     private com.github.lzyzsd.circleprogress.DonutProgress progressCircle;
-    private int progressCircle_maxValue = 300;
+    private int progressCircle_maxValue = 150;
     private int steps = 0;
     private BluetoothConnector btc;
     private BTDeviceDelegate delegate;

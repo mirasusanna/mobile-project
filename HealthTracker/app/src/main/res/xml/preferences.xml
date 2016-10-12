@@ -5,18 +5,21 @@
         android:key="sex"
         android:title="Sex"
         android:entries="@array/sex"
-        android:entryValues="@array/sex"/>
+        android:entryValues="@array/sex"
+        android:summary="%s"/>
 
     <EditTextPreference
         android:key="weight"
         android:title="Weight"
         android:inputType="number"
+        android:dialogMessage="Your weight in kg"
         android:summary="Your weight in kg" />
 
     <EditTextPreference
         android:key="height"
         android:title="Height"
         android:inputType="number"
+        android:dialogMessage="Your height in cm"
         android:summary="Your height in cm" />
 
     <EditTextPreference
@@ -29,6 +32,7 @@
         android:key="activity-level"
         android:title="Activity level"
         android:entries="@array/activity_level"
-        android:entryValues="@array/activity_level" />
+        android:entryValues="@array/activity_level"
+        android:summary="%s"/>
 
 </PreferenceScreen>

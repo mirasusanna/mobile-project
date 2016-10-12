@@ -67,7 +67,8 @@ public class BluetoothConnectActivity extends AppCompatActivity {
 
                         BTDeviceDelegate delegate = BTDeviceDelegate.INSTANCE;
                         delegate.setBtDevice(deviceList.get(position));
-
+                        recyclerView.setAdapter(new BluetoothConnectRecyclerViewAdapter(new ArrayList<String>(), new ArrayList<String>()));
+                        tv_title.setText("Connection succesful");
                     }
                 });
     }
