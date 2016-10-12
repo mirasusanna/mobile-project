@@ -49,8 +49,9 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent i = new Intent(this, PreferencesActivity.class);
+            startActivity(i);
             return true;
         } else if (id == R.id.action_bt_device) {
             Intent intent = new Intent(this, BluetoothConnectActivity.class);
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+
     }
 
     private void setupViewPager(ViewPager viewPager) {
