@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:key="sex"
+        android:title="Sex"
+        android:entries="@array/sex"
+        android:entryValues="@array/sex"/>
+
+    <EditTextPreference
+        android:key="weight"
+        android:title="Weight"
+        android:inputType="number"
+        android:summary="Your weight" />
+
+    <EditTextPreference
+        android:key="height"
+        android:title="Height"
+        android:inputType="number"
+        android:summary="Your height" />
+
+    <ListPreference
+        android:key="activity-level"
+        android:title="Activity level"
+        android:entries="@array/activity_level"
+        android:entryValues="@array/activity_level" />
+
+</PreferenceScreen>
