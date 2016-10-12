@@ -1,21 +1,19 @@
 package fi.mobileproject.healthtracker;
 
-import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
@@ -25,17 +23,16 @@ import java.util.Observer;
  */
 public class DailyFragment extends Fragment implements SensorEventListener, Observer {
     private SensorManager sm;
+    private boolean running = false;
+    private Button btn;
     private TextView tv_distance;
     private TextView tv_calories;
     private TextView tv_BPM;
     private com.github.lzyzsd.circleprogress.DonutProgress progressCircle;
     private int progressCircle_maxValue = 300;
     private int steps = 0;
-
-    BluetoothScanner bts;
-    BluetoothConnector btc;
-
-    List<BluetoothDevice> deviceList;
+    private BluetoothConnector btc;
+    private BTDeviceDelegate delegate;
 
     public DailyFragment() {
 
@@ -46,24 +43,20 @@ public class DailyFragment extends Fragment implements SensorEventListener, Obse
         super.onCreate(savedInstanceState);
         sm = (SensorManager)getActivity().getSystemService(Context.SENSOR_SERVICE);
 
-        bts = new BluetoothScanner(getContext(), getActivity());
+        delegate = BTDeviceDelegate.INSTANCE;
+
         btc = new BluetoothConnector(getContext());
         btc.addObserver(this);
-        bts.scanDevices(5000);
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                deviceList = bts.getDeviceList();
 
-                btc.connectToDevice(deviceList.get(0));
-            }
-        }, 6000);
+        //if (delegate.getBtDevice() != null) {
+        //    btc.connectToDevice(delegate.getBtDevice());
+        //}
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_daily, container, false);
+        btn = (Button) view.findViewById(R.id.DailyFragment_start_button);
         tv_distance = (TextView) view.findViewById(R.id.DailyFragment_distance);
         tv_distance.setText("0\nKM");
         tv_calories = (TextView) view.findViewById(R.id.DailyFragment_calories);
@@ -74,14 +67,32 @@ public class DailyFragment extends Fragment implements SensorEventListener, Obse
         progressCircle.setMax(progressCircle_maxValue);
         progressCircle.setSuffixText(" / " + progressCircle_maxValue + " steps");
 
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!running) {
+                    running = true;
+                    if (delegate.getBtDevice() != null) {
+                        btc.connectToDevice(delegate.getBtDevice());
+                    } else {
+                        System.out.println("AAAAAAA!!!");
+                    }
+                    btn.setText("STOP");
+                } else {
+                    running = false;
+                    btn.setText("START");
+                }
+            }
+        });
+
         return view;
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        //tv_stepsTaken.setText(String.valueOf(event.values[0]));
-        //(int)event.values[0];
-        steps += 1;
+        if (running) {
+            steps += 1;
+        }
         if (steps <= progressCircle_maxValue) {
             progressCircle.setProgress(steps);
             tv_distance.setText(String.format(Locale.ENGLISH, "%.1f\nKM",((steps*0.7)/1000)));
@@ -108,7 +119,6 @@ public class DailyFragment extends Fragment implements SensorEventListener, Obse
     public void onPause() {
         super.onPause();
         sm.unregisterListener(this);
-        bts.stopScanner();
     }
 
     @Override

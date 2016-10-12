@@ -32,6 +32,7 @@ public class BluetoothScanner {
     private Activity activity;
     private BluetoothLeScanner leScanner;
     private List<BluetoothDevice> deviceList = new ArrayList<>();
+    private BluetoothDevice btDevice = null;
 
     public BluetoothScanner(Context context, Activity activity) {
         handler = new Handler();
@@ -64,6 +65,14 @@ public class BluetoothScanner {
 
     public List<BluetoothDevice> getDeviceList() {
         return deviceList;
+    }
+
+    public void setBtDevice(BluetoothDevice btDevice) {
+        this.btDevice = btDevice;
+    }
+
+    public BluetoothDevice getBtDevice() {
+        return btDevice;
     }
 
     public void stopScanner() {

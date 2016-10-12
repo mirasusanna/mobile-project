@@ -6,4 +6,7 @@
     <string name="one">Overview Screen</string>
     <string name="two">Daily Screen</string>
     <string name="three">Journal Screen</string>
+    <string name="action_bt_connect">Connect HR sensor</string>
+    <string name="scanning_bt_devices">Scanning devices, please wait...</string>
+    <string name="bt_device_scan_complete">Scan complete, select device:</string>
 </resources>

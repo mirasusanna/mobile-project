@@ -23,7 +23,7 @@ public class BluetoothConnector extends Observable {
     private String deviceName;
     private String hr_value;
 
-    BluetoothConnector(Context context) {
+    public BluetoothConnector(Context context) {
         this.context = context;
     }
 
