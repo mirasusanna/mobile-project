@@ -28,6 +28,12 @@
         android:inputType="number"
         android:summary="Your age" />
 
+    <EditTextPreference
+        android:key="goal"
+        android:title="Daily goal"
+        android:inputType="number"
+        android:summary="Your workout step goal" />
+
     <ListPreference
         android:key="activity-level"
         android:title="Activity level"

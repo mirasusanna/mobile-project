@@ -11,18 +11,18 @@ import java.util.ArrayList;
  * Created by Toga on 12.10.2016.
  */
 
-public class BluetoothConnectRecyclerViewAdapter extends RecyclerView.Adapter<ListViewRowHolder> {
+public class JournalFragmentRecyclerViewAdapter extends RecyclerView.Adapter<ListViewRowHolder> {
 
     private ArrayList<String> titles, contents;
 
-    public BluetoothConnectRecyclerViewAdapter(ArrayList<String> titles, ArrayList<String> contents) {
+    public JournalFragmentRecyclerViewAdapter(ArrayList<String> titles, ArrayList<String> contents) {
         this.titles = titles;
         this.contents = contents;
     }
 
     @Override
     public ListViewRowHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_row_bt, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_row_journal, parent, false);
         ListViewRowHolder holder = new ListViewRowHolder(view);
         return holder;
     }

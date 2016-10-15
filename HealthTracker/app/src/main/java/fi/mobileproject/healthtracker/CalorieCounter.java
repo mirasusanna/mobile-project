@@ -1,5 +1,9 @@
 package fi.mobileproject.healthtracker;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 /**
  * Created by MiraHiltunen on 08/10/16.
  */
@@ -7,9 +11,35 @@ package fi.mobileproject.healthtracker;
 
 public class CalorieCounter {
 
-    public CalorieCounter() {
+    private SharedPreferences prefs;
+    private int age;
+    private int weight;
+    private String sex;
+    private String activityLevel;
 
+    public CalorieCounter(Context context) {
+        prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs.registerOnSharedPreferenceChangeListener(prefListener);
+        age = Integer.parseInt(prefs.getString("age", "25"));
+        weight = Integer.parseInt(prefs.getString("weight", "75"));
+        sex = prefs.getString("sex", "Male");
+        activityLevel = prefs.getString("activity-level", "Light");
     }
+
+    public SharedPreferences.OnSharedPreferenceChangeListener prefListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            if (key.equals("age")) {
+                age = Integer.parseInt(prefs.getString("age", "25"));
+            } else if (key.equals("weight")) {
+                weight = Integer.parseInt(prefs.getString("weight", "75"));
+            } else if (key.equals("sex")) {
+                sex = prefs.getString("sex", "Male");
+            } else if (key.equals("activity-level")) {
+                activityLevel = prefs.getString("activity-level", "Light");
+            }
+        }
+    };
 
     /**
      * Counts estimate for basic daily calorires based on user information
@@ -19,10 +49,6 @@ public class CalorieCounter {
         // these two values could probably be represented as ints rather than doubles
         double dailyCalories = 0;
         double metabolism = 0;
-
-        // TODO: get these values from preferences
-        String activityLevel = "";
-        int weight = 0;
 
         // Formula for calculating calories for daily metabolism (the amount body will consume for metabolism etc):
         // var1 * weight * var2, where var1 and var2 are age dependent
@@ -37,11 +63,6 @@ public class CalorieCounter {
         // 30-60 years: 8,7 W + 829
         // over 60 years: 10,5 W + 596
 
-
-        // TODO: fetch actual user information from preferences
-        // get sex and age from prefs
-        int age = 0;
-        String sex = "";
         double var1 = 0;
         int var2 = 0;
         if (sex == "Male") {
@@ -55,7 +76,7 @@ public class CalorieCounter {
                 var1 = 13.5;
                 var2 = 487;
             }
-        } else if (sex == "Female") {
+        } else {
             if(age < 30) {
                 var1 = 14.7;
                 var2 = 496;
@@ -65,8 +86,6 @@ public class CalorieCounter {
             } else if (age >= 60) {
                 var1 = 10.5;
                 var2 = 596;
-            } else {
-                // TODO: Throw error if sex is undefined ?
             }
         }
 
@@ -113,9 +132,10 @@ public class CalorieCounter {
 
     /**
      * Counts exercise calories based on heart rate and exercise duration
+     * (Code changed: no longer takes in duration, we need this value every second the HR sensor updates)
      * @return
      */
-    public double countExerciseCalories(double duration, int heartRate) {
+    public double countExerciseCalories(int heartRate) {
         double calories = 0;
 
         // I'm not sure how scientific this is but who cares
@@ -126,23 +146,18 @@ public class CalorieCounter {
         // Formula for female:
         // ((-20.4022 + (0.4472 x HR) - (0.1263 x W) + (0.074 x A))/4.184) x 60 x T
 
+        // Formula changed below to represent the change to second.
+
         // WHERE
         // HR = Heart rate (in beats/minute)
         // W = Weight (in kilograms)
         // A = Age (in years)
         // T = Exercise duration time (in hours)
 
-        // TODO: get weight, age and sex from preferences
-        // Heart rate and duration are passed as parameters
-        String sex = "";
-        int age = 0;
-        int weight = 0;
         if (sex == "Male") {
-            calories = ((-55.0969 + (0.6309 * heartRate) + (0.1988 * weight) + (0.2017 * age))/4.184) * 60 * duration;
-        } else if (sex == "Female") {
-            calories = ((-20.4022 + (0.4472 * heartRate) - (0.1263 * weight) + (0.074 * age))/4.184) * 60 * duration;
+            calories = ((-55.0969 + (0.6309 * heartRate) + (0.1988 * weight) + (0.2017 * age))/4.184) / 60;
         } else {
-            // TODO: Throw error if sex is undefined ?
+            calories = ((-20.4022 + (0.4472 * heartRate) - (0.1263 * weight) + (0.074 * age))/4.184) / 60;
         }
 
         return calories;

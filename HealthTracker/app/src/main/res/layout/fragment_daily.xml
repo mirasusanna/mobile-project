@@ -5,17 +5,25 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/DailyFragment_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"/>
+
     <Button
         android:id="@+id/DailyFragment_start_button"
         android:text="Start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="165dp"/>
+        android:layout_marginTop="215dp"/>
 
     <com.github.lzyzsd.circleprogress.DonutProgress
         android:id="@+id/donut_progress"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="70dp"
         android:layout_width="240dp"
         android:layout_height="240dp"
         android:layout_centerHorizontal="true"
@@ -32,7 +40,7 @@
         android:orientation="horizontal"
         android:gravity="center_horizontal"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="160dp">
+        android:layout_marginBottom="110dp">
         <TextView
             android:id="@+id/DailyFragment_distance"
             android:text="1.4\nKM"

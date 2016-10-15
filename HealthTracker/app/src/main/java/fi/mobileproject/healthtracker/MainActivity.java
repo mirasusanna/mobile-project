@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
 
     private String firstTabTitle = "Overview";
-    private String secondTabTitle = "Daily";
+    private String secondTabTitle = "Exercise";
     private String thirdTabTitle = "Journal";
 
     @Override
