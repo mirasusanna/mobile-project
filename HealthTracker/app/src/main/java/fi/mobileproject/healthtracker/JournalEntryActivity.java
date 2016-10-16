@@ -24,7 +24,7 @@ public class JournalEntryActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.JournalEntryActivity_toolbar);
         setSupportActionBar(toolbar);
 
-        int entry = getIntent().getExtras().getInt("entry");
+        int entry = getIntent().getExtras().getInt("entry")+1;
 
         SQLite exerciseDB = new SQLite(this, "exercisedb", null, 2);
         SQLiteDatabase db = exerciseDB.getReadableDatabase();
@@ -41,18 +41,16 @@ public class JournalEntryActivity extends AppCompatActivity {
         c.close();
         db.close();
 
-        // String.format(Locale.ENGLISH, "%.1f\nKM",distance)
-
         TextView tv_date = (TextView) findViewById(R.id.JournalEntryActivity_date);
         tv_date.setText(entryDetails.get(0));
         TextView tv_duration = (TextView) findViewById(R.id.JournalEntryActivity_duration);
         tv_duration.setText(String.format(Locale.ENGLISH, "%s minutes",entryDetails.get(4)));
         TextView tv_distance = (TextView) findViewById(R.id.JournalEntryActivity_distance);
-        tv_distance.setText(String.format(Locale.ENGLISH, "%.3s\nKM",entryDetails.get(1)));
+        tv_distance.setText(String.format(Locale.ENGLISH, "%.1f\nKM",Double.parseDouble(entryDetails.get(1))));
         TextView tv_calories = (TextView) findViewById(R.id.JournalEntryActivity_calories);
-        tv_calories.setText(String.format(Locale.ENGLISH, "%.3s\nCAL",entryDetails.get(2)));
+        tv_calories.setText(String.format(Locale.ENGLISH, "%.1f\nCAL",Double.parseDouble(entryDetails.get(2))));
         TextView tv_maxBPM = (TextView) findViewById(R.id.JournalEntryActivity_maxbpm);
-        tv_maxBPM.setText(String.format(Locale.ENGLISH, "%s\nMax BPM",entryDetails.get(3)));
+        tv_maxBPM.setText(String.format(Locale.ENGLISH, "%s\nMax\nBPM",entryDetails.get(3)));
 
     }
 

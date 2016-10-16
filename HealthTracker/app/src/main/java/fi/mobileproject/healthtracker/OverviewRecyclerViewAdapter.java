@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.android.volley.toolbox.ImageLoader;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,13 +18,13 @@ import java.util.List;
 
 public class OverviewRecyclerViewAdapter extends RecyclerView.Adapter<ListViewRowHolder> {
 
-    private String[] cardTitles, cardContents;
+    private ArrayList<String> cardTitles, cardContents = new ArrayList<>();
     private Context mContext;
     private ImageLoader imageLoader;
     private int focusedItem = 0;
 
 
-    public OverviewRecyclerViewAdapter(String[] cardTitles, String[] cardContents) {
+    public OverviewRecyclerViewAdapter(ArrayList cardTitles, ArrayList cardContents) {
         this.cardTitles = cardTitles;
         this.cardContents = cardContents;
     }
@@ -38,12 +39,12 @@ public class OverviewRecyclerViewAdapter extends RecyclerView.Adapter<ListViewRo
 
     @Override
     public void onBindViewHolder(ListViewRowHolder listViewRowHolder, int position) {
-        listViewRowHolder.cardTitle.setText(cardTitles[position]);
-        listViewRowHolder.cardContent.setText(cardContents[position]);
+        listViewRowHolder.cardTitle.setText(cardTitles.get(position));
+        listViewRowHolder.cardContent.setText(cardContents.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return cardTitles.length;
+        return cardTitles.size();
     }
 }

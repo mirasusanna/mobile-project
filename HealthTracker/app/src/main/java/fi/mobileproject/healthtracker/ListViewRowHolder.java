@@ -13,9 +13,9 @@ import android.widget.TextView;
  */
 
 public class ListViewRowHolder extends RecyclerView.ViewHolder {
+    ImageView cardThumbnail;
     TextView cardTitle;
     TextView cardContent;
-    ImageView cardThumbnail;
 
     public ListViewRowHolder (View view) {
         super(view);

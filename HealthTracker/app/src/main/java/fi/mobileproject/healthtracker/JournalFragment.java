@@ -66,7 +66,7 @@ public class JournalFragment extends Fragment {
                         // Do stuff when clicked.
                         System.out.println("You clicked on position: " + position);
                         Intent intent = new Intent(getContext(), JournalEntryActivity.class);
-                        intent.putExtra("entry", position+1);
+                        intent.putExtra("entry", position);
                         startActivity(intent);
                     }
                 });

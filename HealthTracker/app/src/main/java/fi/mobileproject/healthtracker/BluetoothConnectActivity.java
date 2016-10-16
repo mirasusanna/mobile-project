@@ -65,10 +65,10 @@ public class BluetoothConnectActivity extends AppCompatActivity {
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         bts.setBtDevice(deviceList.get(position));
 
-                        BTDeviceDelegate delegate = BTDeviceDelegate.INSTANCE;
+                        BluetoothDeviceDelegate delegate = BluetoothDeviceDelegate.INSTANCE;
                         delegate.setBtDevice(deviceList.get(position));
                         recyclerView.setAdapter(new BluetoothConnectRecyclerViewAdapter(new ArrayList<String>(), new ArrayList<String>()));
-                        tv_title.setText("Connection succesful");
+                        tv_title.setText(getString(R.string.bt_device_connection_complete));
                     }
                 });
     }

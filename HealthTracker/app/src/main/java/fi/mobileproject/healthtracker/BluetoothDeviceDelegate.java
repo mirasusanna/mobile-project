@@ -1,16 +1,15 @@
 package fi.mobileproject.healthtracker;
 
 import android.bluetooth.BluetoothDevice;
-import android.content.Context;
 
 /**
  * Created by Toga on 12.10.2016.
  */
 
-public enum BTDeviceDelegate {
+public enum BluetoothDeviceDelegate {
     INSTANCE;
 
-    private BTDeviceDelegate() {
+    private BluetoothDeviceDelegate() {
     }
 
     private BluetoothDevice device = null;

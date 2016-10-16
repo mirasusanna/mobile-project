@@ -43,7 +43,7 @@ public class DailyFragment extends Fragment implements SensorEventListener, Obse
     private int progressCircle_maxValue = 10000;
     private int steps = 0;
     private BluetoothConnector btc;
-    private BTDeviceDelegate delegate;
+    private BluetoothDeviceDelegate delegate;
     private CalorieCounter calorieCounter;
     private int maxBPM = 0;
     private double calories;
@@ -69,7 +69,7 @@ public class DailyFragment extends Fragment implements SensorEventListener, Obse
 
         calorieCounter = new CalorieCounter(getContext());
 
-        delegate = BTDeviceDelegate.INSTANCE;
+        delegate = BluetoothDeviceDelegate.INSTANCE;
 
         btc = new BluetoothConnector(getContext());
         btc.addObserver(this);
@@ -117,9 +117,6 @@ public class DailyFragment extends Fragment implements SensorEventListener, Obse
                             SQLite exerciseDB = new SQLite(getContext(), "exercisedb", null, 2);
                             SQLiteDatabase db = exerciseDB.getWritableDatabase();
                             if (db != null) {
-                                //String dbDistance = Double.toString(distance);
-                                //String dbCalories = Double.toString(calories);
-                                //String dbMaxBPM = Integer.toString(maxBPM);
                                 ContentValues newRecord = new ContentValues();
                                 newRecord.put("date", dateFormat.format(date));
                                 newRecord.put("distance",distance);
