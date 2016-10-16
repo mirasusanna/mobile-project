@@ -114,17 +114,17 @@ public class DailyFragment extends Fragment implements SensorEventListener, Obse
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            SQLite exerciseDB = new SQLite(getContext(), "exercisedb", null, 1);
+                            SQLite exerciseDB = new SQLite(getContext(), "exercisedb", null, 2);
                             SQLiteDatabase db = exerciseDB.getWritableDatabase();
                             if (db != null) {
-                                String dbDistance = Double.toString(distance);
-                                String dbCalories = Double.toString(calories);
-                                String dbMaxBPM = Integer.toString(maxBPM);
+                                //String dbDistance = Double.toString(distance);
+                                //String dbCalories = Double.toString(calories);
+                                //String dbMaxBPM = Integer.toString(maxBPM);
                                 ContentValues newRecord = new ContentValues();
                                 newRecord.put("date", dateFormat.format(date));
-                                newRecord.put("distance",dbDistance);
-                                newRecord.put("calories",dbCalories);
-                                newRecord.put("maxbpm",dbMaxBPM);
+                                newRecord.put("distance",distance);
+                                newRecord.put("calories",calories);
+                                newRecord.put("maxbpm",maxBPM);
                                 long duration = new Date().getTime() - date.getTime();
                                 long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
                                 newRecord.put("duration",Long.toString(diffInMinutes));
@@ -163,7 +163,6 @@ public class DailyFragment extends Fragment implements SensorEventListener, Obse
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        System.out.println("Asd pasd it's taking steps!");
         if (running) {
             steps += 1;
         }

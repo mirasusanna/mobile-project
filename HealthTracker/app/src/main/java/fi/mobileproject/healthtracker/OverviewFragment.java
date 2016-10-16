@@ -56,7 +56,6 @@ public class OverviewFragment extends Fragment {
         adapter = new OverviewRecyclerViewAdapter(cardTitles, cardContents);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        System.out.println("recycler view?");
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 

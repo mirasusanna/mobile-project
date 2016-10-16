@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SQLite extends SQLiteOpenHelper {
 
-    String createSQL = "CREATE TABLE exercisedb (date TEXT, distance TEXT, calories TEXT, maxbpm TEXT, duration TEXT)";
+    String createSQL = "CREATE TABLE exercisedb (date TEXT, distance REAL, calories REAL, maxbpm INTEGER, duration TEXT)";
 
     public SQLite(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);

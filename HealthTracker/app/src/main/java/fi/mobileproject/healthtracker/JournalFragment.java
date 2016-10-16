@@ -33,8 +33,8 @@ public class JournalFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SQLite moviedb = new SQLite(getContext(), "exercisedb", null, 1);
-        SQLiteDatabase db = moviedb.getReadableDatabase();
+        SQLite exerciseDB = new SQLite(getContext(), "exercisedb", null, 2);
+        SQLiteDatabase db = exerciseDB.getReadableDatabase();
 
         Cursor c = db.query("exercisedb", null, null, null, null, null, null);
 
@@ -64,9 +64,9 @@ public class JournalFragment extends Fragment {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         // Do stuff when clicked.
-                        System.out.println("You clicked on: " + position);
+                        System.out.println("You clicked on position: " + position);
                         Intent intent = new Intent(getContext(), JournalEntryActivity.class);
-                        intent.putExtra("entry", position);
+                        intent.putExtra("entry", position+1);
                         startActivity(intent);
                     }
                 });
